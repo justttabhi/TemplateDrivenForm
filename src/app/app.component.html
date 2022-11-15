@@ -1,0 +1,64 @@
+<div class="container card">
+  
+  <h1>Template-driven Form and its Validations</h1>
+  <form #signInForm="ngForm" (ngSubmit)="user(signInForm.value)">
+    <div>
+      <label for="fname">First Name: </label>
+      <input type="text" class="form-control" id="fname" name="fname" placeholder="Enter your first name" #variableFName="ngModel" required ngModel>
+      <span *ngIf="variableFName.untouched || variableFName.touched && variableFName.invalid " style="color: red">Required</span>
+    </div>
+    <div>
+      <label for="lname">Last Name: </label>
+      <input type="text" class="form-control" id="lname" name="lname" placeholder="Enter your last name" ngModel>
+    </div>
+    <div>
+      <span class="form-label">Gender:</span><br>
+      <label for="male">Male</label>&nbsp;
+      <input type="radio" id="male" name="Gender" value="Male" ngModel>&nbsp; &nbsp;
+      <label for="female">Female</label>&nbsp;
+      <input type="radio" id="female" name="Gender" value="Female" ngModel>
+
+    </div>
+    <div>
+      <label for="bdate" class="form-label">Date of Birth: </label>
+      <input type="date" class="form-control" id="bdate" name="bdate" ngModel>
+    </div>
+    <div>
+      <label for="email">Email: </label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="Enter your Email" #variable="ngModel" required ngModel>
+      <span *ngIf="variable.untouched || variable.touched && variable.invalid " style="color: red">Required</span>
+      <!-- <span *ngIf="variable.untouched=true && variable.invalid=true" style="color: red" >Required</span> -->
+    </div>
+    <div>
+      <div>
+        <!-- button k click pe true or false condition -->
+      <button (click)="toggleOn =!toggleOn">Add Bio Toggle</button>
+      </div>
+      <div *ngIf="!toggleOn">
+        <label for="des" class="form-label">Bio:</label>
+        <textarea class="form-control" name="bio" id="des" cols="30" rows="10" placeholder="Your Bio" ngModel></textarea>
+      </div>
+    </div>
+    <div>
+      <label for="pass" class="form-label">Password</label>
+      <input class="form-control" required #variablePassword="ngModel" minlength="4" type="password" placeholder="Password" id="pass" name="password" ngModel>  <!-- name="value" -->
+      <span *ngIf="variablePassword.untouched">Required</span>
+    </div>
+    <div>
+      <input type="reset" class="btn btn-primary">&nbsp;
+      <input type="submit" class="btn btn-primary" *ngIf="signInForm.valid" (ngSubmit)="user(signInForm)"><br>
+      <p>Submit will appear after form completion</p>
+    </div>
+  </form>
+
+</div>
+<button (click)="user(signInForm)">Outside the form</button>
+
+{{signInForm.value | json}}
+
+
+<!-- Display Data -->
+<!-- <ul>
+  <li>{{myDetail.firstname}}</li>
+  <li>{{myDetail.lastname}}</li>
+</ul> -->
